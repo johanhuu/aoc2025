@@ -1,64 +1,43 @@
-
-
-def parse_input():
-    with open("input1.txt") as f:
-    #with open("example1.txt") as f:
+def parse_input() -> list[str]:
+    # with open("files/example1.txt") as f:
+    with open("files/input1.txt") as f:
         return [line.rstrip() for line in f.readlines()]
 
-def part1(data):
-    print(data)
-    val = 50
 
+def part1(data: list[str]) -> int:
+    value = 50
     counter = 0
+
     for rotation in data:
         direction = rotation[0]
         increment = int(rotation[1:])
 
         if direction == "L":
-            val -= increment
-        else:
-            val += increment
+            increment *= -1
+        value = (value + increment) % 100
 
-        while val > 99 or val < 0:
-            if val > 99:
-                val -= 100
-            elif val < 0:
-                val += 100
-
-        if val == 0:
+        if value == 0:
             counter += 1
 
     return counter
 
 
-def part2(data):
-    val = 50
-
+def part2(data: list[str]) -> int:
+    value = 50
     counter = 0
+
     for rotation in data:
         direction = rotation[0]
         increment = int(rotation[1:])
 
-        for i in range(1, increment + 1):
+        for i in range(increment):
+            dvalue = -1 if direction == "L" else 1
+            value = (value + dvalue) % 100
 
-            if direction == "L":
-                val -= 1
-            else:
-                val += 1
-
-            
-
-            if val > 99:
-                val -= 100
-            elif val < 0:
-                val += 100
-
-            if val == 0:
+            if value == 0:
                 counter += 1
-        
 
     return counter
-
 
 
 def main() -> None:
