@@ -30,7 +30,7 @@ def part2(data: list[str]) -> int:
         direction = rotation[0]
         increment = int(rotation[1:])
 
-        for i in range(increment):
+        for _ in range(increment):
             dvalue = -1 if direction == "L" else 1
             value = (value + dvalue) % 100
 
