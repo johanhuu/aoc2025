@@ -10,15 +10,14 @@ def parse_input() -> list[range]:
 
 
 def part1(data: list[range]) -> int:
-    counter = 0
-    for interval in data:
-        for i in interval:
-            s = str(i)
-            size = len(s)
-            if s[: size // 2] == s[size // 2 :]:
-                counter += i
-
-    return counter
+    return sum(
+        [
+            i
+            for interval in data
+            for i in interval
+            if (s := str(i)) and s[: len(s) // 2] == s[len(s) // 2 :]
+        ]
+    )
 
 
 def part2(data: list[range]) -> int:
