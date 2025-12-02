@@ -27,14 +27,12 @@ def part2(data: list[range]) -> int:
             s = str(i)
             size = len(s)
 
-            window_size = 1
-            while window_size <= size // 2:
+            for window_size in range(1, size // 2 + 1):
                 window = s[0:window_size]
                 max_repeat = size // window_size
                 if window * max_repeat == s:
                     counter += i
                     break
-                window_size += 1
 
     return counter
 
