@@ -1,14 +1,13 @@
-
 def parse_input() -> list[range]:
-    data = []
-    #with open("files/example2.txt") as f:
+    # with open("files/example2.txt") as f:
     with open("files/input2.txt") as f:
-        for line in f.readlines():
-            intervals = line.rstrip().split(",")
-            for interval in intervals:
-                begin, end = interval.split("-")
-                data.append(range(int(begin), int(end) + 1))
-    return data
+        return [
+            range(begin, end + 1)
+            for line in f
+            for interval in line.rstrip().split(",")
+            for begin, end in [map(int, interval.split("-"))]
+        ]
+
 
 def part1(data: list[range]) -> int:
     counter = 0
@@ -16,7 +15,7 @@ def part1(data: list[range]) -> int:
         for i in interval:
             s = str(i)
             size = len(s)
-            if s[:size//2] == s[size//2:]:
+            if s[: size // 2] == s[size // 2 :]:
                 counter += i
 
     return counter
