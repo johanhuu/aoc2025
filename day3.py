@@ -16,9 +16,8 @@ def part1(data: list[list[int]]) -> int:
             second_slice = battery[largest_index + 1:]
             second_largest = battery[battery.index(max(second_slice), largest_index + 1)]
             largest = str(battery[largest_index]) + str(second_largest)
-        
+
         ans += int(largest)
-    
 
     return ans
 
