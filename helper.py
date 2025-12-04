@@ -14,6 +14,16 @@ def get_adjacent(r: int, c: int, r_lim: int, c_lim: int) -> tuple[tuple[int, int
     )
 
 
+def get_adjacent_8(r: int, c: int, r_lim: int, c_lim: int) -> tuple[tuple[int, int], ...]:
+    adjacent_8 = [
+        *get_adjacent(r, c, r_lim, c_lim),
+        *get_diagonal_ne(r, c, r_lim, c_lim, 1),
+        *get_diagonal_se(r, c, r_lim, c_lim, 1),
+        *get_diagonal_sw(r, c, r_lim, c_lim, 1),
+        *get_diagonal_nw(r, c, r_lim, c_lim, 1),
+    ]
+    return tuple(adjacent_8)
+
 def get_diagonal_ne(
     r: int, c: int, r_lim: int, c_lim: int, item_lim: int = -1
 ) -> tuple[tuple[int, int], ...]:

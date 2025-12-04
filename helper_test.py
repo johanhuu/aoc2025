@@ -1,5 +1,6 @@
 import pytest
 from helper import (
+    get_adjacent_8,
     get_diagonal_ne,
     get_diagonal_nw,
     get_diagonal_se,
@@ -63,3 +64,10 @@ def test_get_diagonal_nw():
     res = get_diagonal_nw(7, 7, 10, 10)
     assert res == ((6, 6), (5, 5), (4, 4), (3, 3), (2, 2), (1, 1), (0, 0))
     assert get_diagonal_nw(7, 7, 10, 10, 3) == ((6, 6), (5, 5), (4, 4))
+
+
+def test_get_adjacent_8():
+    res = get_adjacent_8(3, 3, 10, 10)
+    assert res == ((2, 3), (3, 4), (4, 3), (3, 2), (2, 4), (4, 4), (4, 2), (2, 2))
+    res = get_adjacent_8(1, 0, 10, 10)
+    assert res == ((0, 0), (1, 1), (2, 0), (0, 1), (2, 1))
