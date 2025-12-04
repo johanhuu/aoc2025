@@ -15,48 +15,56 @@ def get_adjacent(r: int, c: int, r_lim: int, c_lim: int) -> tuple[tuple[int, int
 
 
 def get_diagonal_ne(
-    r: int, c: int, r_lim: int, c_lim: int
+    r: int, c: int, r_lim: int, c_lim: int, item_lim: int = -1
 ) -> tuple[tuple[int, int], ...]:
-    positions = []
+    positions: list[tuple[int, int]] = []
     cr, cc = r - 1, c + 1
     while cr >= 0 and cc < c_lim:
         positions.append((cr, cc))
         cr -= 1
         cc += 1
+        if len(positions) == item_lim:
+            break
     return tuple(positions)
 
 
 def get_diagonal_se(
-    r: int, c: int, r_lim: int, c_lim: int
+    r: int, c: int, r_lim: int, c_lim: int, item_lim: int = -1
 ) -> tuple[tuple[int, int], ...]:
-    positions = []
+    positions: list[tuple[int, int]] = []
     cr, cc = r + 1, c + 1
     while cr < r_lim and cc < c_lim:
         positions.append((cr, cc))
         cr += 1
         cc += 1
+        if len(positions) == item_lim:
+            break
     return tuple(positions)
 
 
 def get_diagonal_sw(
-    r: int, c: int, r_lim: int, c_lim: int
+    r: int, c: int, r_lim: int, c_lim: int, item_lim: int = -1
 ) -> tuple[tuple[int, int], ...]:
-    positions = []
+    positions: list[tuple[int, int]] = []
     cr, cc = r + 1, c - 1
     while cr < r_lim and cc >= 0:
         positions.append((cr, cc))
         cr += 1
         cc -= 1
+        if len(positions) == item_lim:
+            break
     return tuple(positions)
 
 
 def get_diagonal_nw(
-    r: int, c: int, r_lim: int, c_lim: int
+    r: int, c: int, r_lim: int, c_lim: int, item_lim: int = -1
 ) -> tuple[tuple[int, int], ...]:
-    positions = []
+    positions: list[tuple[int, int]] = []
     cr, cc = r - 1, c - 1
     while cr >= 0 and cc >= 0:
         positions.append((cr, cc))
         cr -= 1
         cc -= 1
+        if len(positions) == item_lim:
+            break
     return tuple(positions)

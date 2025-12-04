@@ -44,18 +44,22 @@ def test_get_adjacent_bottom_right():
 def test_get_diagonal_ne():
     res = get_diagonal_ne(7, 7, 10, 10)
     assert res == ((6, 8), (5, 9))
+    assert get_diagonal_ne(7, 7, 10, 10, 1) == ((6, 8),)
 
 
 def test_get_diagonal_se():
     res = get_diagonal_se(7, 7, 10, 10)
     assert res == ((8, 8), (9, 9))
+    assert get_diagonal_se(7, 7, 10, 10, 1) == ((8, 8),)
 
 
 def test_get_diagonal_sw():
     res = get_diagonal_sw(7, 7, 10, 10)
     assert res == ((8, 6), (9, 5))
+    assert get_diagonal_sw(7, 7, 10, 10, 1) == ((8, 6),)
 
 
 def test_get_diagonal_nw():
     res = get_diagonal_nw(7, 7, 10, 10)
     assert res == ((6, 6), (5, 5), (4, 4), (3, 3), (2, 2), (1, 1), (0, 0))
+    assert get_diagonal_nw(7, 7, 10, 10, 3) == ((6, 6), (5, 5), (4, 4))
