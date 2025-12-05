@@ -31,7 +31,7 @@ def part2(data: tuple[list[range], list[int]]) -> int:
     ranges, _ = data
     ranges.sort(key=lambda r: r[0])
 
-    ## gg ranges aren't mutable
+    # gg ranges aren't mutable
     intervals = []
     for r in ranges:
         intervals.append([r[0], r[-1]])
@@ -41,12 +41,12 @@ def part2(data: tuple[list[range], list[int]]) -> int:
     for current in intervals[1:]:
         last = merged_intervals[-1]
 
-        if current[0] <= last[1] + 1:
+        if current[0] <= last[1]:
             last[1] = max(current[1], last[1])
         else:
             merged_intervals.append(current)
 
-    return sum(interval[1] - interval[0] + 1 for interval in merged_intervals)
+    return sum(end - begin + 1 for begin, end in merged_intervals)
 
 
 def main() -> None:
