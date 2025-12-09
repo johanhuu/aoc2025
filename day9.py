@@ -39,7 +39,7 @@ def build_lines(tile1, tile2, row_lines, col_lines):
 def is_within_bounds(tile, row_lines, col_lines):
     r, c = tile
 
-    left_ok, right_ok, above_ok, below_ok = False,False,False,False,
+    left_ok, right_ok, above_ok, below_ok = False,False,False,False
 
     left_ok = any(True for line in row_lines[r] if line[0] <= r) | any(
         True for col, lines in col_lines.items() for line in lines if col <= c and line[0] <= r <= line[1]
@@ -53,6 +53,8 @@ def is_within_bounds(tile, row_lines, col_lines):
     below_ok = any(True for row, lines in row_lines.items() for line in lines if row >= r and line[0] <= c <= line[1]) | any(
         True for line in col_lines[c] if line[1] >= c
     )
+
+
     return all([left_ok, right_ok, above_ok, below_ok])
 
 
@@ -105,10 +107,15 @@ def part2(data) -> int:
             v1 = (r1, c2)
             v2 = (r2, c1)
 
+
             if is_within_bounds(v1, row_lines, col_lines) and is_within_bounds(v2, row_lines, col_lines):
                 area = (abs(r1 - r2) + 1) * (abs(c1 - c2) + 1)
+                
                 #answer = max(area, answer)
                 if area >= answer:
+                    mid_point = (max(r1, r2) - min(r1,r2), max(c2, c1) - min(c1,c2))
+                    if not is_within_bounds(mid_point, row_lines, col_lines):
+                        continue
                     print(area)
                     answer = area
     
