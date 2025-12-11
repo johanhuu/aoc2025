@@ -3,14 +3,15 @@ from functools import cache
 from typing import Deque
 
 
-def parse_input():
+def parse_input() -> dict[str, list[str]]:
     data = defaultdict(list)
+    # with open("files/example11.txt") as f:
     with open("files/input11.txt") as f:
-    #with open("files/example11.txt") as f:
         for line in f.readlines():
             node, links = line.rstrip().split(":")
             data[node].extend(links.split())
     return data
+
 
 def bfs(data) -> int:
     queue: Deque[str] = Deque()
@@ -34,20 +35,14 @@ def part1(data) -> int:
 def part2(data) -> int:
     @cache
     def memo(node, dac, fft) -> int:
-        ways = 0
-        if node == "out" and dac and fft:
-            return 1
-        elif node == "out":
-            return 0
+        if node == "out":
+            return dac & fft
         elif node == "dac":
             dac = True
         elif node == "fft":
             fft = True
+        return sum(memo(neighbor, dac, fft) for neighbor in data[node])
 
-        for neighbour in data[node]:
-            ways += memo(neighbour, dac ,fft)
-        return ways
-    
     return memo("svr", False, False)
 
 
