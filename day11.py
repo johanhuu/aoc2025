@@ -14,7 +14,7 @@ def parse_input() -> dict[str, list[str]]:
 
 
 def bfs(graph: dict[str, list[str]], start: str, end: str) -> int:
-    queue: Deque[str] = Deque(graph[start])
+    queue: Deque[str] = Deque([start])
 
     counter = 0
     while queue:
