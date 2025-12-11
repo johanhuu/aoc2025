@@ -27,13 +27,13 @@ def bfs(graph: dict[str, list[str]], start: str, end: str) -> int:
     return counter
 
 
-def part1(graph) -> int:
+def part1(graph: dict[str, list[str]]) -> int:
     return bfs(graph, "you", "out")
 
 
-def part2(graph) -> int:
+def part2(graph: dict[str, list[str]]) -> int:
     @cache
-    def memo(node, dac, fft) -> int:
+    def memo(node: str, dac: bool, fft: bool) -> int:
         if node == "out":
             return dac & fft
         elif node == "dac":
