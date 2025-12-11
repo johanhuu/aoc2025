@@ -13,26 +13,25 @@ def parse_input() -> dict[str, list[str]]:
     return data
 
 
-def bfs(data) -> int:
-    queue: Deque[str] = Deque()
-    queue.extend(data["you"])
+def bfs(graph: dict[str, list[str]], start: str, end: str) -> int:
+    queue: Deque[str] = Deque(graph[start])
 
     counter = 0
     while queue:
         node = queue.pop()
-        if node == "out":
+        if node == end:
             counter += 1
-        else:
-            queue.extend(data[node])
+            continue
+        queue.extend(graph[node])
 
     return counter
 
 
-def part1(data) -> int:
-    return bfs(data)
+def part1(graph) -> int:
+    return bfs(graph, "you", "out")
 
 
-def part2(data) -> int:
+def part2(graph) -> int:
     @cache
     def memo(node, dac, fft) -> int:
         if node == "out":
@@ -41,7 +40,7 @@ def part2(data) -> int:
             dac = True
         elif node == "fft":
             fft = True
-        return sum(memo(neighbor, dac, fft) for neighbor in data[node])
+        return sum(memo(neighbor, dac, fft) for neighbor in graph[node])
 
     return memo("svr", False, False)
 
